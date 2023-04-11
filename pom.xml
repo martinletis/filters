@@ -19,6 +19,11 @@
       <artifactId>google-api-services-gmail</artifactId>
       <version>v1-rev20230206-2.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.oauth-client</groupId>
+      <artifactId>google-oauth-client-jetty</artifactId>
+      <version>1.34.1</version>
+    </dependency>
   </dependencies>
 
 </project>
