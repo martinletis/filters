@@ -13,4 +13,12 @@
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-gmail</artifactId>
+      <version>v1-rev20230206-2.0.0</version>
+    </dependency>
+  </dependencies>
+
 </project>
