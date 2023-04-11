@@ -27,8 +27,6 @@ import java.util.Map;
 public class FilterManager {
 
   private static final String APP_NAME = "martinletis-filters-1.0";
-  private static final String CLIENT_SECRET =
-      "client_secret_779034051627-5spgb5pucbne41qqnpe44vkg46pc4e3s.apps.googleusercontent.com.json";
 
   public static void main(String[] args) throws Exception {
     NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
@@ -36,9 +34,7 @@ public class FilterManager {
 
     GoogleClientSecrets secrets;
     try (Reader reader =
-        new FileReader(
-            Joiner.on(File.separator)
-                .join(System.getProperty("user.home"), "tmp", CLIENT_SECRET))) {
+        new FileReader(args[0])) {
       secrets = GoogleClientSecrets.load(jsonFactory, reader);
     }
 
