@@ -45,7 +45,7 @@ public class FilterManager {
     File dataDirectory =
         new File(
             Joiner.on(File.separator)
-                .join(System.getProperty("user.home"), "tmp", APP_NAME, "datastore"));
+                .join(System.getProperty("user.home"), "tmp", "datastore", APP_NAME));
 
     AuthorizationCodeFlow flow =
         new GoogleAuthorizationCodeFlow.Builder(
