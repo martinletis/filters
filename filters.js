@@ -86,7 +86,7 @@ function initAuth() {
     '779034051627-0kucbfm2mm1rggfd5fr74k4a0a6sae8s.apps.googleusercontent.com' : 
     '75676298790-14bh2i530mfg7pebtadh9vvokh404rk1.apps.googleusercontent.com';
 
-  console.log('Using client_id ' + client_id);
+  console.debug('Using client_id ' + client_id);
 
   client = google.accounts.oauth2.initTokenClient({
     client_id: client_id,
