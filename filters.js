@@ -75,6 +75,11 @@ function listFilters(token) {
       if (filter.action.forward) {
         action.appendChild(document.createTextNode(filter.action.forward));
       }
+
+      const re = /^list:\(?"?<?(.+)[\.@]google\.com>?"?\)?$/;
+      if (filter.criteria.query && filter.action.addLabels && filter.criteria.query.match(re)) {
+        row.bgColor = filter.action.addLabels.includes(filter.criteria.query.match(re).at(1)) ? '#90ee90' : '#ee9090';
+      }
     })
   });
 }
