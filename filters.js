@@ -27,46 +27,55 @@ function listFilters(token) {
       }
 
       const row = table.insertRow();
-      row.insertCell().innerHTML = filter.id;
       
-      const criteria = row.insertCell();
+      const from = row.insertCell();
       if (filter.criteria.from) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('from: ' + filter.criteria.from)));
+        from.appendChild(document.createTextNode(filter.criteria.from));
       }
+      const to = row.insertCell();
       if (filter.criteria.to) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('to: ' + filter.criteria.to)));
+        to.appendChild(document.createTextNode(filter.criteria.to));
       }
       if (filter.criteria.subject) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('subject: ' + filter.criteria.subject)));
+        // criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('subject: ' + filter.criteria.subject)));
+        console.warn('Unsupported "criteria.subject": ' + filter.criteria.subject);
       }
+      const query = row.insertCell();
       if (filter.criteria.query) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('query: ' + filter.criteria.query)));
+        query.appendChild(document.createTextNode(filter.criteria.query));
       }
       if (filter.criteria.negatedQuery) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('negatedQuery: ' + filter.criteria.negatedQuery)));
+        // criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('negatedQuery: ' + filter.criteria.negatedQuery)));
+        console.warn('Unsupported "criteria.negatedQuery": ' + filter.criteria.negatedQuery);
       }
       if (filter.criteria.hasAttachment) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('hasAttachment: ' + filter.criteria.hasAttachment)));
+        // criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('hasAttachment: ' + filter.criteria.hasAttachment)));
+        console.warn('Unsupported "criteria.hasAttachment": ' + filter.criteria.hasAttachment);
       }
       if (filter.criteria.excludeChats) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('excludeChats: ' + filter.criteria.excludeChats)));
+        // criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('excludeChats: ' + filter.criteria.excludeChats)));
+        console.warn('Unsupported "criteria.excludeChats": ' + filter.criteria.excludeChats);
       }
       if (filter.criteria.size) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('size: ' + filter.criteria.size)));
+        // criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('size: ' + filter.criteria.size)));
+        console.warn('Unsupported "criteria.size": ' + filter.criteria.size);
       }
       if (filter.criteria.sizeComparison) {
-        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('sizeComparison: ' + filter.criteria.sizeComparison)));
+        // criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('sizeComparison: ' + filter.criteria.sizeComparison)));
+        console.warn('Unsupported "criteria.sizeComparison": ' + filter.criteria.sizeComparison);
       }
 
-      const action = row.insertCell();
+      const addLabels = row.insertCell();
       if (filter.action.addLabels) {
-        action.appendChild(document.createElement('span').appendChild(document.createTextNode('addLabels: ' + filter.action.addLabels)));
+        addLabels.appendChild(document.createTextNode(filter.action.addLabels));
       }
+      const removeLabels = row.insertCell();
       if (filter.action.removeLabels) {
-        action.appendChild(document.createElement('span').appendChild(document.createTextNode('removeLabels: ' + filter.action.removeLabels)));
+        removeLabels.appendChild(document.createTextNode(filter.action.removeLabels));
       }
+      const forward = row.insertCell();
       if (filter.action.forward) {
-        action.appendChild(document.createElement('span').appendChild(document.createTextNode('forward: ' + filter.action.forward)));
+        action.appendChild(document.createTextNode(filter.action.forward));
       }
     })
   });
