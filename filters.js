@@ -11,9 +11,12 @@ function listFilters(token) {
     .then(data => data.filter);
 
   Promise.all([labels, filters]).then(([labels, filters]) => {
+    console.debug(filters);
+
     const map = new Map();
     labels.forEach(label => map.set(label.id, label.name));
 
+    const re = /^list:\(<([^\.]+)\.google\.com>\)$/;
     const table = document.getElementById('filters');
     filters.sort((a, b) => a.criteria.query ? a.criteria.query.localeCompare(b.criteria.query) : 0).forEach(filter => {
       const mapper = id => map.get(id) || id;
@@ -40,6 +43,10 @@ function listFilters(token) {
       }
       const query = row.insertCell();
       if (filter.criteria.query) {
+        const match = filter.criteria.query.match(re);
+        if (match && filter.action.addLabels) {
+          row.bgColor = filter.action.addLabels.map(label => label.split('/').at(-1)).includes(match.at(1)) ? '#90ee90' : '#ee9090';
+        }
         query.appendChild(document.createTextNode(filter.criteria.query));
       }
       if (filter.criteria.negatedQuery) {
@@ -74,11 +81,6 @@ function listFilters(token) {
       const forward = row.insertCell();
       if (filter.action.forward) {
         action.appendChild(document.createTextNode(filter.action.forward));
-      }
-
-      const re = /^list:\(?"?<?(.+)[\.@]google\.com>?"?\)?$/;
-      if (filter.criteria.query && filter.action.addLabels && filter.criteria.query.match(re)) {
-        row.bgColor = filter.action.addLabels.includes(filter.criteria.query.match(re).at(1)) ? '#90ee90' : '#ee9090';
       }
     })
   });
