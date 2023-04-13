@@ -16,7 +16,7 @@ function listFilters(token) {
 
     console.log(map);
 
-    var table = document.getElementById('filters');
+    const table = document.getElementById('filters');
     filters.forEach(filter => {
       const mapper = id => map.get(id) || id;
       if (filter.action.addLabelIds) {
@@ -26,10 +26,48 @@ function listFilters(token) {
         filter.action.removeLabels = filter.action.removeLabelIds.map(mapper);
       }
 
-      var row = table.insertRow();
-      var cell = row.insertCell().innerHTML = filter.id;
-      var cell = row.insertCell().appendChild(document.createTextNode(JSON.stringify(filter.criteria)));
-      var cell = row.insertCell().appendChild(document.createTextNode(JSON.stringify(filter.action)));
+      const row = table.insertRow();
+      row.insertCell().innerHTML = filter.id;
+      
+      const criteria = row.insertCell();
+      if (filter.criteria.from) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('from: ' + filter.criteria.from)));
+      }
+      if (filter.criteria.to) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('to: ' + filter.criteria.to)));
+      }
+      if (filter.criteria.subject) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('subject: ' + filter.criteria.subject)));
+      }
+      if (filter.criteria.query) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('query: ' + filter.criteria.query)));
+      }
+      if (filter.criteria.negatedQuery) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('negatedQuery: ' + filter.criteria.negatedQuery)));
+      }
+      if (filter.criteria.hasAttachment) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('hasAttachment: ' + filter.criteria.hasAttachment)));
+      }
+      if (filter.criteria.excludeChats) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('excludeChats: ' + filter.criteria.excludeChats)));
+      }
+      if (filter.criteria.size) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('size: ' + filter.criteria.size)));
+      }
+      if (filter.criteria.sizeComparison) {
+        criteria.appendChild(document.createElement('span').appendChild(document.createTextNode('sizeComparison: ' + filter.criteria.sizeComparison)));
+      }
+
+      const action = row.insertCell();
+      if (filter.action.addLabels) {
+        action.appendChild(document.createElement('span').appendChild(document.createTextNode('addLabels: ' + filter.action.addLabels)));
+      }
+      if (filter.action.removeLabels) {
+        action.appendChild(document.createElement('span').appendChild(document.createTextNode('removeLabels: ' + filter.action.removeLabels)));
+      }
+      if (filter.action.forward) {
+        action.appendChild(document.createElement('span').appendChild(document.createTextNode('forward: ' + filter.action.forward)));
+      }
     })
   });
 }
