@@ -15,7 +15,7 @@ function listFilters(token) {
     labels.forEach(label => map.set(label.id, label.name));
 
     const table = document.getElementById('filters');
-    filters.forEach(filter => {
+    filters.sort((a, b) => a.criteria.query ? a.criteria.query.localeCompare(b.criteria.query) : 0).forEach(filter => {
       const mapper = id => map.get(id) || id;
       if (filter.action.addLabelIds) {
         filter.action.addLabels = filter.action.addLabelIds.map(mapper);
