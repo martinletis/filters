@@ -14,8 +14,6 @@ function listFilters(token) {
     const map = new Map();
     labels.forEach(label => map.set(label.id, label.name));
 
-    console.log(map);
-
     const table = document.getElementById('filters');
     filters.forEach(filter => {
       const mapper = id => map.get(id) || id;
