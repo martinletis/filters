@@ -16,7 +16,7 @@ function listFilters(token) {
     const map = new Map();
     labels.forEach(label => map.set(label.id, label.name));
 
-    const re = /^list:\(<([^\.]+)\.google\.com>\)$/;
+    const re = /^list:\(<([^\.]+)[\.@]google\.com>\)$/;
     const table = document.getElementById('filters');
     filters.sort((a, b) => a.criteria.query ? a.criteria.query.localeCompare(b.criteria.query) : 0).forEach(filter => {
       const mapper = id => map.get(id) || id;
