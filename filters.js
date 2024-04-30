@@ -104,6 +104,8 @@ function initAuth() {
     callback: (tokenResponse) => {
       listFilters(tokenResponse.access_token);
     },
+    prompt: '',
+    enable_granular_consent: false,
   });
   
   client.requestAccessToken();
