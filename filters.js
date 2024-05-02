@@ -101,9 +101,7 @@ function initAuth() {
       'https://www.googleapis.com/auth/gmail.labels',
       'https://www.googleapis.com/auth/gmail.settings.basic',
     ].join(' '),
-    callback: (tokenResponse) => {
-      listFilters(tokenResponse.access_token);
-    },
+    callback: tokenResponse => listFilters(tokenResponse.access_token),
     prompt: '',
     enable_granular_consent: false,
   });
