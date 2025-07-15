@@ -1,12 +1,12 @@
-function listFilters(token) {
+function listFilters(tokenResponse) {
   // https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list
   const labels =
-    fetch('https://gmail.googleapis.com/gmail/v1/users/me/labels', {headers: {Authorization: 'Bearer ' + token}})
+    fetch('https://gmail.googleapis.com/gmail/v1/users/me/labels', {headers: {Authorization: 'Bearer ' + tokenResponse.access_token}})
       .then(response => response.json())
       .then(data => data.labels);
 
   // https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list
-  const filters = fetch('https://gmail.googleapis.com/gmail/v1/users/me/settings/filters', {headers: {Authorization: 'Bearer ' + token}})
+  const filters = fetch('https://gmail.googleapis.com/gmail/v1/users/me/settings/filters', {headers: {Authorization: 'Bearer ' + tokenResponse.access_token}})
     .then(response => response.json())
     .then(data => data.filter);
 
@@ -95,15 +95,14 @@ function initAuth() {
 
   console.debug('Using client_id ' + client_id);
 
-  client = google.accounts.oauth2.initTokenClient({
+  const client = google.accounts.oauth2.initTokenClient({
     client_id: client_id,
     scope: [
       'https://www.googleapis.com/auth/gmail.labels',
       'https://www.googleapis.com/auth/gmail.settings.basic',
     ].join(' '),
-    callback: tokenResponse => listFilters(tokenResponse.access_token),
+    callback: listFilters,
     prompt: '',
-    enable_granular_consent: false,
     error_callback: error => console.warn(JSON.stringify(error)),
   });
   
