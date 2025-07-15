@@ -1,16 +1,12 @@
 function listFilters(tokenResponse) {
   // https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list
-  const labels =
-    fetch('https://gmail.googleapis.com/gmail/v1/users/me/labels', {headers: {Authorization: 'Bearer ' + tokenResponse.access_token}})
-      .then(response => response.json())
-      .then(data => data.labels);
+  const labels = gapi.client.gmail.users.labels.list({userId: 'me'}).then(response => response.result.labels);
 
   // https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list
-  const filters = fetch('https://gmail.googleapis.com/gmail/v1/users/me/settings/filters', {headers: {Authorization: 'Bearer ' + tokenResponse.access_token}})
-    .then(response => response.json())
-    .then(data => data.filter);
+  const filters = gapi.client.gmail.users.settings.filters.list({userId: 'me'}).then(response => response.result.filter);
 
   Promise.all([labels, filters]).then(([labels, filters]) => {
+    console.debug(labels);
     console.debug(filters);
 
     const map = new Map();
@@ -107,4 +103,12 @@ function initAuth() {
   });
   
   client.requestAccessToken();
-}  
+}
+
+function initGapi() {
+  gapi.client.init({
+    'discoveryDocs': ['https://gmail.googleapis.com/$discovery/rest?version=v1'],
+  }).then(initAuth);
+}
+
+gapi.load('client', initGapi);
